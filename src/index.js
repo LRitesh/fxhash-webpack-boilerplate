@@ -38,7 +38,7 @@ let renderer = new THREE.WebGLRenderer({
 renderer.setPixelRatio(pixelRatio);
 renderer.setSize(windowWidth, windowHeight);
 renderer.domElement.id = "three-canvas";
-document.body.appendChild(renderer.domElement); // appebds three-canvas to dom
+document.body.appendChild(renderer.domElement); // appends three-canvas to dom
 
 // camera controls
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -54,7 +54,7 @@ draw();
 
 function setup() {
   // load gltf model
-  let loader = new GLTFLoader().setPath('/gltf/');
+  let loader = new GLTFLoader().setPath('./gltf/');
   loader.load('mandala-bloom.glb', function (gltf) {
     scene.add(gltf.scene);
   });
@@ -69,6 +69,13 @@ function setup() {
   let pointLight = new THREE.PointLight(pointLightColor, 150.0, 0);
   pointLight.position.set(0, 0, -100);
   scene.add(pointLight);
+
+  // add sphere
+  const geometry = new THREE.SphereGeometry(0.07);
+  const material = new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe: true });
+  const sphere = new THREE.Mesh(geometry, material);
+  sphere.position.set(0, 0.5, 0);
+  scene.add(sphere);
 }
 
 function draw() {
